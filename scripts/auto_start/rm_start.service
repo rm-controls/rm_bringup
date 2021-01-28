@@ -1,0 +1,10 @@
+[Unit]
+Description=rm auto startup
+After=network-online.target
+[Service]
+User=dynamicx
+#Type=simple
+Type=forking
+ExecStart=/bin/bash -c "/home/dynamicx/rm_start.sh"
+[Install]
+WantedBy=multi-user.target
