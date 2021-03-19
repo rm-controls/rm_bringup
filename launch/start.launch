@@ -1,0 +1,7 @@
+<launch>
+    <include file="$(find rm_fsm)/launch/load.launch">
+    </include>
+
+    <include file="$(find rm_base)/launch/rm_base.launch">
+    </include>
+</launch>
