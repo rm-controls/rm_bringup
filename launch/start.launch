@@ -4,4 +4,7 @@
 
     <include file="$(find rm_base)/launch/rm_base.launch">
     </include>
+
+    <include file="$(find rm_detection)/launch/detection.launch">
+    </include>
 </launch>
