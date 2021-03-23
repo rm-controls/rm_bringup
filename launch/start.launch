@@ -1,4 +1,10 @@
 <launch>
+    <arg name="robot_type" default="$(env ROBOT_TYPE)" doc="Robot type [standard, hero, engineer]"/>
+    <arg name="load_controller" default="true"/>
+    <arg name="ekf" default="true"/>
+    <arg name="odom_tf" default="true"/>
+    <arg name="camera_tf" default="true"/>
+
     <include file="$(find rm_fsm)/launch/load.launch">
     </include>
 
