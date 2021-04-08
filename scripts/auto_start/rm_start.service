@@ -5,6 +5,6 @@ After=network-online.target
 User=dynamicx
 Type=simple
 #Type=forking
-ExecStart=/bin/bash -c "/home/dynamicx/rm_start.sh"
+ExecStart=/bin/bash -c "~/rm_start.sh"
 [Install]
 WantedBy=multi-user.target
