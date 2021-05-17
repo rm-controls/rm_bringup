@@ -13,24 +13,12 @@
     <rosparam file="$(find rm_shooter_controllers)/config/$(arg robot_type).yaml" command="load"/>
     <rosparam if="$(arg ekf)" param="controllers/chassis_controller/enable_odom_tf">false</rosparam>
 
-    <!-- load the controllers -->
-
-    <node if="$(arg load_controller)" name="controller_spawner" pkg="controller_manager" type="spawner"
-          respawn="false" output="screen"
-          args="
-          controllers/robot_state_controller
-          controllers/joint_state_controller
-          controllers/chassis_controller
-          controllers/gimbal_controller
-          controllers/shooter_controller
-          controllers/imu_sensor_controller
-    "/>
     <node if="$(arg ekf)" pkg="robot_localization" type="ekf_localization_node" name="ekf_localization"
           clear_params="true">
         <rosparam command="load" file="$(find rm_chassis_controllers)/config/localization.yaml"/>
     </node>
 
-    <include file="$(find rm_fsm)/launch/load.launch">
+    <include file="$(find rm_manual)/launch/load.launch">
     </include>
 
     <include file="$(find rm_base)/launch/rm_base.launch">
