@@ -1,0 +1,10 @@
+[Unit]
+Description=rm auto start ros master
+After=network-online.target
+[Service]
+User=dynamicx
+Type=simple
+#Type=forking
+ExecStart=/bin/bash -c "~/start_master.sh"
+[Install]
+WantedBy=multi-user.target
