@@ -5,14 +5,18 @@ project(rm_bringup)
 # add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
-    rm_base
-    rm_common
-    )
+        rm_base
+        rm_common
+        )
 
 catkin_package(
 )
 
 include_directories(
-    # include
-    ${catkin_INCLUDE_DIRS}
+        # include
+        ${catkin_INCLUDE_DIRS}
 )
+
+install(DIRECTORY scripts launch
+        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+        )
