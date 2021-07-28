@@ -27,6 +27,6 @@
     <include file="$(find rm_fsm)/launch/load.launch">
     </include>
 
-    <include file="$(find rm_detection)/launch/detection.launch">
+    <include file="$(find rm_detection)/launch/double_detection.launch">
     </include>
 </launch>
