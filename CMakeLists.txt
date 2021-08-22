@@ -4,10 +4,7 @@ project(rm_bringup)
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
-find_package(catkin REQUIRED COMPONENTS
-        rm_base
-        rm_common
-        )
+find_package(catkin REQUIRED COMPONENTS)
 
 catkin_package(
 )
