@@ -21,7 +21,7 @@
 
     <node name="rm_dbus" pkg="rm_dbus" type="rm_dbus" respawn="false"/>
 
-    <include file="$(find rm_base)/launch/rm_base.launch">
+    <include file="$(find rm_hw)/launch/rm_hw.launch">
     </include>
 
     <include file="$(find rm_fsm)/launch/load.launch">
