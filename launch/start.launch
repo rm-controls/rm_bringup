@@ -3,9 +3,12 @@
     <arg name="load_controller" default="true"/>
     <arg name="odom_tf" default="true"/>
 
-    <node if="$(arg odom_tf)" pkg="tf" type="static_transform_publisher" name="odom_tf_publisher"
-          args="0 0 0 0 0 0 1 map odom 100"/>
+    <node if="$(arg odom_tf)" pkg="tf2_ros" type="static_transform_publisher" name="odom_tf_publisher"
+          args="0 0 0 0 0 0 1 map odom"/>
+
     <rosparam file="$(find rm_dbus)/config/dbus.yaml" command="load"/>
+    <rosparam file="$(find robot_state_controller)/config/config.yaml" command="load"/>
+    <rosparam file="$(find imu_filter_controllers)/config/complementary_controller.yaml" command="load"/>
     <rosparam file="$(find rm_chassis_controllers)/config/$(arg robot_type).yaml" command="load"/>
     <rosparam file="$(find rm_gimbal_controllers)/config/$(arg robot_type).yaml" command="load"/>
     <rosparam file="$(find rm_shooter_controllers)/config/$(arg robot_type).yaml" command="load"/>
