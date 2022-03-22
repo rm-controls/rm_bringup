@@ -7,22 +7,14 @@
           args="0 0 0 0 0 0 1 map odom"/>
 
     <rosparam file="$(find rm_dbus)/config/dbus.yaml" command="load"/>
-    <rosparam file="$(find robot_state_controller)/config/config.yaml" command="load"/>
-    <rosparam file="$(find imu_filter_controllers)/config/complementary_controller.yaml" command="load"/>
-    <rosparam file="$(find rm_chassis_controllers)/config/$(arg robot_type).yaml" command="load"/>
-    <rosparam file="$(find rm_gimbal_controllers)/config/$(arg robot_type).yaml" command="load"/>
-    <rosparam file="$(find rm_shooter_controllers)/config/$(arg robot_type).yaml" command="load"/>
-    <rosparam file="$(find rm_orientation_controller)/config/$(arg robot_type).yaml" command="load"/>
-    <rosparam file="$(find rm_calibration_controllers)/config/$(arg robot_type).yaml" command="load"/>
+    <rosparam file="$(find rm_config)/config/rm_controllers/$(arg robot_type).yaml"/>
 
     <node name="rm_dbus" pkg="rm_dbus" type="rm_dbus" respawn="false"/>
 
-    <include file="$(find rm_hw)/launch/rm_hw.launch">
+    <include file="$(find rm_config)/launch/rm_hw.launch">
     </include>
 
     <include file="$(find rm_manual)/launch/load.launch">
     </include>
 
-    <include file="$(find rm_detection)/launch/detection.launch">
-    </include>
 </launch>
