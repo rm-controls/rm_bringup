@@ -11,10 +11,8 @@
 
     <node name="rm_dbus" pkg="rm_dbus" type="rm_dbus" respawn="false"/>
 
-    <include file="$(find rm_config)/launch/rm_hw.launch">
-    </include>
+    <include file="$(find rm_config)/launch/rm_hw.launch"/>
 
-    <include file="$(find rm_manual)/launch/load.launch">
-    </include>
+    <include file="$(find rm_config)/launch/manual.launch"/>
 
 </launch>
