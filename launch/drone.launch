@@ -17,10 +17,10 @@
 
     <node name="rm_dbus" pkg="rm_dbus" type="rm_dbus" respawn="false"/>
 
-    <include file="$(find rm_hw)/launch/rm_hw.launch">
+    <include file="$(find rm_config)/launch/rm_hw.launch">
     </include>
 
-    <include file="$(find rm_manual)/launch/load.launch">
+    <include file="$(find rm_config)/launch/manual.launch">
     </include>
 
     <include file="$(find px4_realsense_bridge)/launch/bridge_mavros.launch">
