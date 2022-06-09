@@ -5,6 +5,6 @@ After=network-online.target
 User=dynamicx
 Type=simple
 #Type=forking
-ExecStart=/bin/bash -c "/home/dynamicx/AutoSetCan.sh"
+ExecStart=/bin/bash -c "/home/dynamicx/auto_set_can.sh"
 [Install]
 WantedBy=multi-user.target
