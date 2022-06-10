@@ -1,34 +1,19 @@
-#!/usr/bin/bash
-
-if [[ ! -d ~/Documents ]]; then
-	mkdir ~/Documents
-fi
-cd ~/Documents
-
-newdir=$(date "+%Y%m%d_%H_%M")
-newhour=$(date "+%Y%m%d_%H")
-dir=$(ls -t | grep "$newhour" | head -n1)
-if [[ -d "$newdir" ]]; then	# 同一分钟内只录制一份
-	cd $newdir
-elif [[ "$dir" != "" ]]; then	# 相邻约10分钟内只录制一份，防止多次开断电生成多个文件夹
-	min=$(echo "$dir" | sed -E 's/^.*_.*_(.*)$/\1/g')
-	newmin=$(date "+%M")
-	if [[ $(expr $newmin - $min) -ge 10 ]]; then
-		mkdir "$newdir"
-	else
-		mv ./$dir $(date "+%Y%m%d_%H_%M")
-		cd $(date "+%Y%m%d_%H_%M")
-	fi
-else 
-	mkdir "$newdir"		# Documents下目录为空的时候创建新目录
-	cd "$newdir"
-fi
-
-while [[ 1 ]] 
-do 
-        for FILEINDEX in $(seq 1 1 4)	# 20 分钟后内容将会被从头开始覆盖 
-        do
-                rosbag record -q -b 2048 --duration=300 -O "$FILEINDEX"  /galaxy_camera/image_raw
-                ls -lht | grep -E "^\d.*$"  > ./rosbag_log.txt 	# 为后续确定1-4个包的时间顺序用
-        done
-done
+#!/bin/bash
+echo " "
+echo "Start to rosbag record camera msg to /home/dynamicx/Document"
+echo ""
+cp `rospack find rm_bringup`/scripts/auto_start/bag_record_service.sh /home/dynamicx
+cp `rospack find rm_bringup`/scripts/auto_start/memory_monitor.sh /home/dynamicx
+chmod 777 /home/dynamicx/bag_record_service.sh
+chmod 777 /home/dynamicx/memory_monitor.sh
+echo " "
+echo "Start to copy service files to /lib/systemd/system/"
+echo ""
+sudo cp `rospack find rm_bringup`/scripts/auto_start/rosbag_record_service.service  /lib/systemd/system/
+sudo cp `rospack find rm_bringup`/scripts/auto_start/memory_monitor.service  /lib/systemd/system/
+echo " "
+echo "Enable camera rosbag record! "
+echo ""
+sudo systemctl enable bag_record_service.service
+sudo systemctl enable memory_monitor.service
+echo "Finish "
