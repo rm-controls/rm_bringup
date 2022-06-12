@@ -9,6 +9,14 @@
 
     <include file="$(find rm_config)/launch/rm_hw.launch"/>
 
+    <include file="$(find rm_config)/launch/vision/camera.launch">
+        <arg name="enable_imu_trigger" value="true"/>
+    </include>
+    <include file="$(find rm_config)/launch/vision/vision_loader.launch"/>
+    <include file="$(find rm_track)/launch/load.launch">
+        <arg name="camera_tf" value="false"/>
+    </include>
+
     <include file="$(find rm_config)/launch/manual.launch"/>
 
 </launch>
