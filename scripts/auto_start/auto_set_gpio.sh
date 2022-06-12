@@ -29,3 +29,5 @@ sudo chmod 777 /sys/class/gpio/gpio660/value
 sudo chmod 777 /sys/class/gpio/gpio661/value
 sudo chmod 777 /sys/class/gpio/gpio662/value
 sudo chmod 777 /sys/class/gpio/gpio663/value
+Adone
+
