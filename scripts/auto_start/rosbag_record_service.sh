@@ -1,5 +1,9 @@
 #!/bin/bash
 
+source /opt/ros/noetic/setup.bash
+export ROS_PACKAGE_PATH=~/rm_ws:$ROS_PACKAGE_PATH
+source ~/rm_ws/devel/setup.bash
+
 if [[ ! -d ~/Documents ]]; then
 	mkdir ~/Documents
 fi
@@ -10,10 +14,10 @@ newhour=$(date "+%Y%m%d_%H")
 dir=$(ls -t | grep "$newhour" | head -n1)
 if [[ -d "$newdir" ]]; then	# 同一分钟内只录制一份
 	cd $newdir
-elif [[ "$dir" != "" ]]; then	# 相邻约10分钟内只录制一份，防止多次开断电生成多个文件夹
+elif [[ "$dir" != "" ]]; then	# 相邻约5分钟内只录制一份，防止多次开断电生成多个文件夹
 	min=$(echo "$dir" | sed -E 's/^.*_.*_(.*)$/\1/g')
 	newmin=$(date "+%M")
-	if [[ $(expr $newmin - $min) -ge 10 ]]; then
+	if [[ $(expr $newmin - $min) -ge 5 ]]; then
 		mkdir "$newdir"
 	else
 		mv ./$dir $(date "+%Y%m%d_%H_%M")
