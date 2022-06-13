@@ -29,19 +29,11 @@ else
 	cd "$newdir"
 fi
 
-topiclist=$(rostopic list | grep '/galaxy_camera/lower_camera/image_raw')
-topic=''
-if [[ $topiclist != "" ]]; then
-	topic='/galaxy_camera/lower_camera/image_raw'
-else
-	topic='/galaxy_camera/image_raw'
-fi
-
 while [[ 1 ]] 
 do 
         for FILEINDEX in $(seq 1 1 4)	# 20 分钟后内容将会被从头开始覆盖 
         do
-                rosbag record -q -b 2048 --duration=300 -O "$FILEINDEX"  "$topic"
+                rosbag record -q -b 2048 --duration=300 -O "$FILEINDEX"  "/galaxy_camera/standalone_camera/image_raw/compressed" "/galaxy_camera/standalone_camera/camera_info"
                 ls -lht | grep -E "^\d.*$"  > ./rosbag_log.txt 	# 为后续确定1-4个包的时间顺序用
         done
 done
