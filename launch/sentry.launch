@@ -2,7 +2,6 @@
     <arg name="robot_type" default="$(env ROBOT_TYPE)" doc="Robot type [standard, hero, engineer]"/>
     <arg name="load_controller" default="true"/>
     <arg name="odom_tf" default="true"/>
-    <arg name="ekf" default="false"/>
 
     <rosparam file="$(find rm_dbus)/config/dbus.yaml" command="load"/>
     <rosparam file="$(find rm_config)/config/rm_control/rm_hw/$(arg robot_type).yaml" command="load"/>
@@ -17,10 +16,6 @@
     <include file="$(find rm_fsm)/launch/load.launch">
     </include>
 
-    <node if="$(arg ekf)" pkg="robot_localization" type="ekf_localization_node" name="ekf_localization"
-          clear_params="true">
-        <rosparam command="load" file="$(find rm_chassis_controllers)/config/localization.yaml"/>
-    </node>
     <node if="$(arg odom_tf)" pkg="tf2_ros" type="static_transform_publisher" name="odom_tf_publisher"
           args="0 0 0 0 0 0 1 map odom"/>
 </launch>
