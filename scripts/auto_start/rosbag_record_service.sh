@@ -19,6 +19,7 @@ elif [[ "$dir" != "" ]]; then	# 相邻约5分钟内只录制一份，防止多�
 	newmin=$(date "+%M")
 	if [[ $(expr $newmin - $min) -ge 5 ]]; then
 		mkdir "$newdir"
+		cd "$newdir"
 	else
 		mv ./$dir $(date "+%Y%m%d_%H_%M")
 		cd $(date "+%Y%m%d_%H_%M")
@@ -28,11 +29,19 @@ else
 	cd "$newdir"
 fi
 
+topiclist=$(rostopic list | grep '/galaxy_camera/lower_camera/image_raw')
+topic=''
+if [[ $topiclist != "" ]]; then
+	topic='/galaxy_camera/lower_camera/image_raw'
+else
+	topic='/galaxy_camera/image_raw'
+fi
+
 while [[ 1 ]] 
 do 
         for FILEINDEX in $(seq 1 1 4)	# 20 分钟后内容将会被从头开始覆盖 
         do
-                rosbag record -q -b 2048 --duration=300 -O "$FILEINDEX"  /galaxy_camera/image_raw
+                rosbag record -q -b 2048 --duration=300 -O "$FILEINDEX"  "$topic"
                 ls -lht | grep -E "^\d.*$"  > ./rosbag_log.txt 	# 为后续确定1-4个包的时间顺序用
         done
 done
