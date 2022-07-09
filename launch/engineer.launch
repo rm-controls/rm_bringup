@@ -1,17 +1,14 @@
 <launch>
     <arg name="load_rm_hw" default="true"/>
 
-    <node pkg="tf" type="static_transform_publisher" name="odom_tf_publisher"
+    <node if="true" pkg="tf" type="static_transform_publisher" name="odom_tf_publisher"
           args="0 0 0 0 0 0 1 map odom 100"/>
 
     <rosparam file="$(find rm_config)/config/rm_controllers/engineer.yaml" command="load"/>
-    <rosparam file="$(find rm_config)/config/rm_manual/engineer.yaml" command="load"/>
-
     <node name="rm_dbus" pkg="rm_dbus" type="rm_dbus" respawn="false"/>
     <include if="$(arg load_rm_hw)" file="$(find rm_config)/launch/rm_hw.launch"/>
-    <include file="$(find rm_config)/launch/manual.launch"/>
-
     <include file="$(find engineer_arm_config)/launch/load_move_group.launch"/>
     <include file="$(find engineer_middleware)/launch/load.launch"/>
 
+    <include file="$(find rm_config)/launch/manual.launch"/>
 </launch>
