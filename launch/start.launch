@@ -1,28 +1,22 @@
 <launch>
     <arg name="robot_type" default="$(env ROBOT_TYPE)" doc="Robot type [standard, hero, engineer]"/>
     <arg name="load_controller" default="true"/>
-    <arg name="odom_tf" default="true"/>
-
-    <node if="$(arg odom_tf)" pkg="tf2_ros" type="static_transform_publisher" name="odom_tf_publisher"
-          args="0 0 0 0 0 0 1 map odom"/>
 
     <rosparam file="$(find rm_dbus)/config/dbus.yaml" command="load"/>
-    <rosparam file="$(find robot_state_controller)/config/config.yaml" command="load"/>
-    <rosparam file="$(find imu_filter_controllers)/config/complementary_controller.yaml" command="load"/>
-    <rosparam file="$(find rm_chassis_controllers)/config/$(arg robot_type).yaml" command="load"/>
-    <rosparam file="$(find rm_gimbal_controllers)/config/$(arg robot_type).yaml" command="load"/>
-    <rosparam file="$(find rm_shooter_controllers)/config/$(arg robot_type).yaml" command="load"/>
-    <rosparam file="$(find rm_orientation_controller)/config/$(arg robot_type).yaml" command="load"/>
-    <rosparam file="$(find rm_calibration_controllers)/config/$(arg robot_type).yaml" command="load"/>
+    <rosparam file="$(find rm_config)/config/rm_controllers/$(arg robot_type).yaml"/>
 
     <node name="rm_dbus" pkg="rm_dbus" type="rm_dbus" respawn="false"/>
 
-    <include file="$(find rm_hw)/launch/rm_hw.launch">
+    <include file="$(find rm_config)/launch/rm_hw.launch"/>
+
+    <include file="$(find rm_config)/launch/vision/camera.launch">
+        <arg name="enable_imu_trigger" value="true"/>
+    </include>
+    <include file="$(find rm_config)/launch/vision/vision_loader.launch"/>
+    <include file="$(find rm_track)/launch/load.launch">
+        <arg name="camera_tf" value="false"/>
     </include>
 
-    <include file="$(find rm_manual)/launch/load.launch">
-    </include>
+    <include file="$(find rm_config)/launch/manual.launch"/>
 
-    <include file="$(find rm_detection)/launch/detection.launch">
-    </include>
 </launch>
