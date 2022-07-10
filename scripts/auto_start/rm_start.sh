@@ -15,4 +15,3 @@ if test -z "${ROS_IP}"; then
   export ROS_IP=$(dig +short localhost)
 fi
 mon launch --disable-ui rm_bringup engineer.launch
-

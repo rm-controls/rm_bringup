@@ -13,6 +13,6 @@ sudo rm  /lib/systemd/system/memory_monitor.service
 echo " "
 echo "Disable camera rosbag record! "
 echo ""
-sudo systemctl disable rosbag_record_service.service 
+sudo systemctl disable rosbag_record_service.service
 sudo systemctl disable memory_monitor.service
 echo "Finish"
