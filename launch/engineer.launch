@@ -10,6 +10,6 @@
     <include if="$(arg load_rm_hw)" file="$(find rm_config)/launch/rm_hw.launch"/>
     <include file="$(find engineer_arm_config)/launch/load_move_group.launch"/>
     <include file="$(find engineer_middleware)/launch/load.launch"/>
-
     <include file="$(find rm_config)/launch/manual.launch"/>
+    <include file="$(find engineer_arm_config)/launch/servo.launch"/>
 </launch>
