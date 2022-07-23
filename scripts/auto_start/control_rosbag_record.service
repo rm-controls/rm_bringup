@@ -1,0 +1,9 @@
+[Unit]
+Description=rm control rosbag record
+After=rm_start.service
+[Service]
+User=dynamicx
+Type=simple
+ExecStart=/bin/bash -c "/home/dynamicx/control_rosbag_record.sh"
+[Install]
+WantedBy=multi-user.target

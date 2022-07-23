@@ -1,9 +1,0 @@
-[Unit]
-Description=rm device memory monitor
-After=create_rosbag_record_service.service
-[Service]
-User=dynamicx
-Type=simple
-ExecStart=/bin/bash -c "/home/dynamicx/create_rosbag_record_service.sh"
-[Install]
-WantedBy=multi-user.target
