@@ -1,26 +1,27 @@
 #!/bin/bash
-echo " "
-echo "Start to remove script files from /home/dynamicx"
-echo ""
 if [[ $# -eq 0 ]];then
         echo "Please enter service files name"
-	exit
+	exit 1
 fi
-service_name="$@"       # service_name 变量将会接收多个服务文件名
-for service in "$service_name"; do
-	rm "~/${service}.sh"
+for service in "$@"; do	# service_name 变量将会接收多个服务文件名
+	echo " "
+	echo "Start to remove script files from /home/dynamicx"
+	echo ""
+	rm "/home/dynamicx/${service}.sh"
+	echo " "
+	echo "Start to remove service files from /lib/systemd/system/"
+	echo ""
+	sudo rm  "/lib/systemd/system/${service}.service"
+	echo " "
+  	echo "Disable $service ! "
+	echo ""
+	sudo systemctl disable "${service}.service"
+	if [[ "$?" -eq 0 ]];then
+		echo "Successfully deleted $service."
+	elif [[ "$?" -eq 1 ]];then
+		echo "Failed to delete $service."
+	else
+		echo "Unknown error."
+	fi
 done
 
-echo " "
-echo "Start to remove service files from /lib/systemd/system/"
-echo ""
-for service in "$service_name"; do 
-	sudo rm  "/lib/systemd/system/${service}.service"
-done
-echo " "
-echo "Disable $service_name ! "
-echo ""
-for service in "$service_name"; do
-	sudo systemctl disable "${service}.service" 
-done
-echo "Finish"
