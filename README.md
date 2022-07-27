@@ -74,7 +74,7 @@ Double-click directly to run the corresponding script.
 
 * **sentry.launch:** launch the codes of sentry
 
-* **start.launch:**launch the codes of robots except sentry
+* **start.launch:** launch the codes of robots except sentry
 
 ## Scripts
 
