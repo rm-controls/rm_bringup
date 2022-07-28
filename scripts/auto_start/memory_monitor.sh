@@ -15,13 +15,13 @@ do
 			for((i=1;i<=$lines;i++));
 			do
 				dir=$(ls -1 | sed -n ${i}p)
-				dir_month=$(echo $dir | sed -E 's/^\d{4}(\d{2}).*/\1/g')
+				dir_month=$(echo $dir | sed -E 's/^[0-9]{4}([0-9]{2}).*/\1/g')
 				if [[ $dir_month -lt $current_month ]]; then	# 删除上个月的录制内容
 					sudo rm -rf $dir
 					is_deleted=1
 					continue
 				fi
-				dir_date=$(echo $dir | sed -E 's/^\d{6}(\d{2}).*/\1/g')	#删除七天前的录制内容
+				dir_date=$(echo $dir | sed -E 's/^[0-9]{6}([0-9]{2}).*/\1/g')	#删除七天前的录制内容
 				if [[ $(expr $current_date - $dir_date) -ge 7 ]]; then
 					sudo rm -rf $dir
 					is_deleted=1
