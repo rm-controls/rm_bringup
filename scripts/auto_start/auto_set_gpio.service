@@ -1,0 +1,10 @@
+[Unit]
+Description=rm auto set gpio
+After=network-online.target
+[Service]
+User=dynamicx
+Type=simple
+#Type=forking
+ExecStart=/bin/bash -c "/home/dynamicx/auto_set_gpio.sh"
+[Install]
+WantedBy=multi-user.target
