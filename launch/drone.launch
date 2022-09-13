@@ -5,6 +5,7 @@
     <arg name="odom_tf" default="true"/>
     <arg name="camera_tf" default="false"/>
 
+    <!--
     <rosparam file="$(find rm_config)/config/rm_control/rm_dbus/dbus.yaml" command="load"/>
     <rosparam file="$(find rm_config)/config/rm_control/rm_hw/$(arg robot_type).yaml" command="load"/>
     <rosparam file="$(find rm_config)/config/rm_control/rm_controllers/$(arg robot_type).yaml" command="load"/>
@@ -19,7 +20,10 @@
 
     <include file="$(find rm_config)/launch/manual.launch">
     </include>
+    -->
 
+    <!--
     <include file="$(find px4_realsense_bridge)/launch/brdge_mavros.launch">
     </include>
+    -->
 </launch>
