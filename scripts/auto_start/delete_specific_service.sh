@@ -15,6 +15,7 @@ for service in "$@"; do	# service_name 变量将会接收多个服务文件名
 	echo " "
   	echo "Disable $service ! "
 	echo ""
+	sudo systemctl stop "${service}.service"
 	sudo systemctl disable "${service}.service"
 	if [[ "$?" -eq 0 ]];then
 		echo "Successfully deleted $service."
