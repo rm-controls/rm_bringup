@@ -18,5 +18,6 @@
     </include>
 
     <include file="$(find rm_config)/launch/manual.launch"/>
+    <include file="$(find rm_config)/launch/referee.launch"/>
 
 </launch>
