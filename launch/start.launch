@@ -15,5 +15,6 @@
     <include file="$(find rm_config)/launch/vision/vision_loader.launch"/>
 
     <include file="$(find rm_config)/launch/manual.launch"/>
+    <include file="$(find rm_config)/launch/referee.launch"/>
 
 </launch>
