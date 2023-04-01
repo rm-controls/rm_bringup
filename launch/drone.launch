@@ -7,7 +7,6 @@
     <rosparam file="$(find rm_config)/config/rm_control/rm_dbus/dbus.yaml" command="load"/>
     <rosparam file="$(find rm_config)/config/rm_control/rm_hw/$(arg robot_type).yaml" command="load"/>
     <rosparam file="$(find rm_config)/config/rm_controllers/$(arg robot_type).yaml" command="load"/>
-    <rosparam file="$(find rm_config)/config/rm_manual/$(arg robot_type).yaml" command="load"/>
 
     <node name="rm_dbus" pkg="rm_dbus" type="rm_dbus" respawn="false"/>
 
@@ -17,10 +16,14 @@
     <include file="$(find rm_config)/launch/manual.launch">
     </include>
 
-    <!--
+    <include file="$(find rm_config)/launch/vision/camera.launch">
+        <arg name="enable_imu_trigger" value="true"/>
+    </include>
+    <include file="$(find rm_config)/launch/vision/vision_loader.launch">
+    </include>
+
     <include file="$(find rm_config)/launch/referee.launch">
     </include>
-    -->
 
     <include file="$(find vision_to_mavros)/launch/t265_all_nodes.launch">
     </include>
