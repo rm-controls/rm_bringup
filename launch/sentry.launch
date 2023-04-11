@@ -1,26 +1,31 @@
 <launch>
     <arg name="robot_type" default="$(env ROBOT_TYPE)" doc="Robot type [standard, hero, engineer]"/>
     <arg name="load_controller" default="true"/>
-    <arg name="odom_tf" default="true"/>
 
     <rosparam file="$(find rm_dbus)/config/dbus.yaml" command="load"/>
-    <rosparam file="$(find rm_config)/config/rm_control/rm_hw/$(arg robot_type).yaml" command="load"/>
-    <rosparam file="$(find rm_fsm)/config/$(arg robot_type).yaml" command="load"/>
-    <rosparam file="$(find rm_config)/config/rm_controllers/$(arg robot_type).yaml" command="load"/>
-
     <node name="rm_dbus" pkg="rm_dbus" type="rm_dbus" respawn="false"/>
 
     <include file="$(find rm_config)/launch/rm_hw.launch">
     </include>
 
-    <node if="$(arg odom_tf)" pkg="tf2_ros" type="static_transform_publisher" name="odom_tf_publisher"
-          args="0 0 0 0 0 0 1 map odom"/>
-
-    <include file="$(find rm_config)/launch/vision/sentry_camera.launch">
+    <include file="$(find rm_config)/launch/vision/camera.launch">
         <arg name="enable_imu_trigger" value="true"/>
     </include>
-    <include file="$(find rm_config)/launch/vision/sentry_vision_loader.launch"/>
+    <include file="$(find rm_config)/launch/vision/vision_loader.launch"/>
 
     <include file="$(find rm_fsm)/launch/load.launch">
     </include>
+    <include file="$(find rm_config)/launch/referee.launch"/>
+
+    <include file="$(find livox_ros_driver2)/launch_ROS1/msg_MID360.launch">
+        <arg name="rviz_enable" value="false"/>
+        <arg name="publish_freq" value="10"/>
+        <arg name="msg_frame_id" value="livox_frame"/>
+    </include>
+
+    <include file="$(find lidar_repost)/launch/repost_nodelet.launch"/>
+    <include file="$(find rm_navigation)/launch/lio_launch/mapping_mid360.launch"/>
+    <include file="$(find linefit_ground_segmentation_ros)/launch/segmentation.launch"/>
+    <include file="$(find rm_navigation)/launch/navigation/move_base.launch"/>
+    <include file="$(find rm_navigation)/launch/navigation/pcl_filters.launch"/>
 </launch>
