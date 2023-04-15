@@ -5,6 +5,7 @@ sudo ip link set can2 up type can bitrate 1000000
 source /opt/ros/noetic/setup.bash
 export ROS_PACKAGE_PATH=~/rm_ws:$ROS_PACKAGE_PATH
 source ~/rm_ws/devel/setup.bash
+sudo apt update && sudo apt upgrade -y
 source /opt/intel/openvino_2021/bin/setupvars.sh
 export ROBOT_TYPE=hero
 export CAMERA_TYPE=hk_camera
