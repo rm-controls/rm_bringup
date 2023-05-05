@@ -25,7 +25,8 @@
 
     <include file="$(find lidar_repost)/launch/repost_nodelet.launch"/>
     <include file="$(find rm_navigation)/launch/lio_launch/mapping_mid360.launch"/>
-    <include file="$(find linefit_ground_segmentation_ros)/launch/segmentation.launch"/>
+    <include
+            file="$(find rm_navigation)/launch/linefit_ground_segmentation/linefit_ground_segmentation.launch"/>
     <include file="$(find rm_navigation)/launch/navigation/move_base.launch"/>
     <include file="$(find rm_navigation)/launch/navigation/pcl_filters.launch"/>
 </launch>
