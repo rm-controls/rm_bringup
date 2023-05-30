@@ -1,6 +1,7 @@
 <launch>
     <arg name="robot_type" default="$(env ROBOT_TYPE)" doc="Robot type [standard, hero, engineer]"/>
     <arg name="load_controller" default="true"/>
+    <arg name="balance" default="true"/>
 
     <rosparam file="$(find rm_dbus)/config/dbus.yaml" command="load"/>
     <rosparam file="$(find rm_config)/config/rm_controllers/$(arg robot_type).yaml"/>
@@ -14,7 +15,9 @@
     </include>
     <include file="$(find rm_config)/launch/vision/vision_loader.launch"/>
 
-    <include file="$(find rm_config)/launch/manual.launch"/>
+    <include file="$(find rm_config)/launch/manual.launch">
+        <arg name="balance" value="$(arg balance)"/>
+    </include>
 
     <include file="$(find rm_config)/launch/referee.launch"/>
 
