@@ -33,7 +33,7 @@ while [[ 1 ]]
 do 
         for FILEINDEX in $(seq 1 1 5)	# 25 分钟后内容将会被从头开始覆盖 
         do
-		rosbag record -q -b 2048 --duration=300 -O "$FILEINDEX" -e "/actuator_states" "/cmd_vel" "/controllers/(.*)" "/dbus_data" "/detection" "/joint_states" "/odom" "/rm_referee/(.*)" "/rm_hw/(.*)" "/rm_track/(.*)" "/tf" "/tf_static" "/track" "/rosout"
+		rosbag record -q -b 2048 --duration=300 -O "$FILEINDEX" -e "/actuator_states" "/cmd_vel" "/controllers/(.*)" "/dbus_data" "/detection" "/joint_states" "/odom" "/rm_referee/(.*)" "/rm_hw/(.*)" "/rm_track/(.*)" "/tf" "/tf_static" "/manual_to_referee" "/track" "/rosout" "/cmd_chassis" "/state"
 		ls -lht | grep -E "^\d.*$"  > ./rosbag_log.txt 	# 为后续确定1-4个包的时间顺序用
         done
 done
