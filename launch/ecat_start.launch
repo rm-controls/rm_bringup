@@ -7,8 +7,14 @@
 
     <node name="rm_dbus" pkg="rm_dbus" type="rm_dbus" respawn="false"/>
 
-    <include file="$(find rm_ecat_ros)/launch/rm_ecat_hw.launch"/>
+    <include file="$(find rm_config)/launch/rm_ecat_hw.launch"/>
+
+    <include file="$(find rm_config)/launch/vision/camera.launch">
+        <arg name="enable_imu_trigger" value="true"/>
+    </include>
+    <include file="$(find rm_config)/launch/vision/vision_loader.launch"/>
 
     <include file="$(find rm_config)/launch/manual.launch"/>
 
+    <include file="$(find rm_config)/launch/referee.launch"/>
 </launch>
